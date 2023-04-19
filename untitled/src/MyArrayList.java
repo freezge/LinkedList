@@ -35,25 +35,29 @@ public class MyArrayList<T> implements MyList<T>{
         }
         arr[size++] = item;
     }
-
+    /*
+     * @add() to add element to the end of LinkedArray
+     * @param item the element we are adding
+     * @param index to insert new element AFTER this index
+     */
     @Override
     public void add(T item, int index) {
-        check_index(index);
-        if(size == arr.length){
+        check_index(index);//checking if index is valid
+        if(size == arr.length){ //increasing size if needed
             increaseSize();
         }
-        T[] buff = (T[]) new Object[arr.length];
+        T[] buff = (T[]) new Object[arr.length];//buffer array
         int j = 0, s = size;
-        for(int i = 0; i < s; i++){
-            buff[j] = arr[i];
-            if(i == index){
-                buff[j+1] = item;
+        for(int i = 0; i < s; i++){//cycle to copy elems of array to buff
+            buff[j] = arr[i];//copying
+            if(i == index){//checking if we reached index
+                buff[j+1] = item;//adding elem to buff array
                 j++;
-                size++;
+                size++;//increasing size
             }
-            j++;
+            j++;//to navigate inside buff
         }
-        arr = buff;
+        arr = buff;//buff is our new changed array
     }
 
 
@@ -80,21 +84,7 @@ public class MyArrayList<T> implements MyList<T>{
         arr = buff;
         return s != size;
     }
-//    @Override
-//    public boolean remove(Object item) {
-//        int buff[] = new int[arr.length];
-//        int s = size, j = 0;
-//        for(int i = 0; i < s; i++){
-//            if(arr[i] == Integer.parseInt((String) item)){
-//                size--;
-//                continue;
-//            }
-//            buff[j] = arr[i];
-//            j++;
-//        }
-//        arr = buff;
-//        return s != size;
-//    }
+
 
     @Override
     public T remove(int index) {

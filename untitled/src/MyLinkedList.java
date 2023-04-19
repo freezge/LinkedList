@@ -91,117 +91,136 @@ public class MyLinkedList<E> implements MyList<E>{
         size++;//insreasing size
     }
 
-
+    /*
+     * @remove_elem() to remove element from the LinkedArray
+     * @param item the element we are removing
+     */
     @Override
     public boolean remove_elem(E item) {
-        Node <E> buff = head;
-        while(buff != null){
-            if(buff.value == item){
-                if (buff.prev != null){
+        Node <E> buff = head; //buffer
+        while(buff != null){ // checking if we are not at the end already
+            if(buff.value == item){//checking for similarity
+                if (buff.prev != null){//checking if we are not removing head
                 buff.prev.next = buff.next;
                 }
                 else{
                     head = buff.next;
                 }
-                if(buff.next != null) {
+                if(buff.next != null) {//checking if we are not removing tail
                     buff.next.prev = buff.prev;
                 }
                 else {
                     tail = buff.prev;
                 }
-                size--;
-                return true;
+                size--;//decreasing the size
+                return true;//returning true if item was in array and was deleted
             }
-            buff = buff.next;
+            buff = buff.next;//next element
         }
-        return false;
+        return false;//returning false if item wasn't in array
     }
-
+    /*
+     * @remove() to remove element from the LinkedArray
+     * @param index the index of element we are removing
+     */
     @Override
     public E remove(int index) {
-        check_index(index);
-        Node <E> buff = head;
-        while(index != 0){
-            buff = buff.next;
+        check_index(index);// checking if we are not at the end already
+        Node <E> buff = head;//buffer
+        while(index != 0){//to find our element
+            buff = buff.next;//next elem
             index--;
         }
-        if (buff.prev != null){
+        if (buff.prev != null){//checking if we are not removing head
             buff.prev.next = buff.next;
         }
         else{
             head = buff.next;
         }
-        if(buff.next != null) {
+        if(buff.next != null) {//checking if we are not removing tail
             buff.next.prev = buff.prev;
         }
         else {
             tail = buff.prev;
         }
-        size--;
-        return buff.value;
+        size--;//decreasing size
+        return buff.value;//returning removed item
     }
-
+    /*
+     * @clear() to clear LinkedArray
+     */
     @Override
     public void clear() {
         size = 0;
         head = null;
         tail = null;
     }
-
+    /*
+     * @get() to get element from LinkedArray
+     * @param index index of element
+     */
     @Override
     public E get(int index) {
-        check_index(index);
+        check_index(index);//checking index for validity
         Node <E> buff = head;
-        while(index != 0){
+        while(index != 0){//fiding our element
             buff = buff.next;
             index--;
         }
-        return buff.value;
+        return buff.value;//returning element
     }
-
+    /*
+     * @indexOf() to find index of element in LinkedArray
+     * @param 0 element we are comparing
+     */
     @Override
     public int indexOf(Object o) {
         int index = 0;
         Node <E> buff = head;
-        while(buff != null){
-            if(buff.value == o){
-                return index;
+        while(buff != null){//loop
+            if(buff.value == o){//comparing values
+                return index;//returning index
             }
-            buff = buff.next;
+            buff = buff.next;//next element
             index++;
         }
-        return -1;
+        return -1;//returning -1 if it does not exist
     }
-
+    /*
+     * @lastindexOf() to find index of last element in LinkedArray
+     * @param 0 element we are comparing
+     */
     @Override
     public int lastIndexOf(Object o) {
         int index = size;
         Node <E> buff = tail;
-        while(buff != null){
-            if(buff.value == o){
-                return index;
+        while(buff != null){//loop
+            if(buff.value == o){//comparing values
+                return index;//returning index
             }
-            buff = buff.prev;
+            buff = buff.prev;//previous element
             index--;
         }
-        return -1;
+        return -1;//returning -1 if it does not exist
     }
-
+    /*
+     * @sort() for sorting
+     * i used bubble sorting method
+     */
     @Override
     public void sort() {
         Node <E> buff = head;
-        int k = 0;
-        while(buff != null){
+        while(buff != null){//loop
             Node <E> buff2 = buff.next;
-            while(buff2 != null){
-                if(((Comparable)buff.value).compareTo(buff2.value) >= 0){
-                    E temp = buff.value;
-                    buff.value = buff2.value;
-                    buff2.value = temp;
+            while(buff2 != null){//loop
+                if(((Comparable)buff.value).compareTo(buff2.value) >= 0){//checking if it is comparable type, 0 if equals, 1 if higher
+                    E temp = buff.value;//changing values between 2 elems
+                    buff.value = buff2.value;//changing values between 2 elems
+                    buff2.value = temp;//changing values between 2 elems
                 }
-                buff2 = buff2.next;
+                buff2 = buff2.next;//next element
             }
-            buff = buff.next;
+            buff = buff.next;//next element
         }
     }
 }
