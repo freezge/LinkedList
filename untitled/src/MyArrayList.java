@@ -1,39 +1,55 @@
 import java.util.ArrayList;
 public class MyArrayList<T> implements MyList<T>{
-    private T[] arr;
-    private int size;
-    MyArrayList(){
-        this.arr = (T[]) new Object[5];;
+    private T[] arr;//array
+    private int size;//to keep track of size
+    MyArrayList(){//constructor for list
+        this.arr = (T[]) new Object[5];
         this.size = 0;
     }
 
+    /*
+     * @size() returns param size
+     * @param size for tracking size
+     */
+    @Override
+    public int size() {
+        return size;
+    }
+    /*
+     * @check_index() checks if index is valid
+     * @param index the index we are checking
+     * @throw throws error if index is out of bounds
+     */
     @Override
     public void check_index(int index){//checking if index is out of bounds
         if (index >= arr.length || index < 0){
             throw new IndexOutOfBoundsException();
         }
     }
-    @Override
-    public int size() {
-        return size;
-    }
-
+    /*
+     * @contains() to check if element is in LinkedArray
+     * @param o the element we are checking
+     * @returns true if element is in LinkedArray, otherwise returns false
+     */
     @Override
     public boolean contains(Object o) {
-        for(int i = 0; i < size(); i++){
-            if (o.equals(arr[i])){
+        for(int i = 0; i < size(); i++){//loop
+            if (o.equals(arr[i])){//checking for similarity
                 return true;
             }
         }
         return false;
     }
-
+    /*
+     * @add() to add element to the end of LinkedArray
+     * @param item the element we are adding
+     */
     @Override
     public void add(T item) {
-        if(size == arr.length){
-            increaseSize();
+        if(size == arr.length){//checking if we are out of space for elements
+            increaseSize();//increasing its size
         }
-        arr[size++] = item;
+        arr[size++] = item;//adding new element
     }
     /*
      * @add() to add element to the end of LinkedArray
