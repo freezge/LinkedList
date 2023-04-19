@@ -60,7 +60,12 @@ public class MyLinkedList<E> implements MyList<E>{
         Node <E> newNode = new Node<E>(item);
         newNode.prev = buff;
         newNode.next = buff.next;
-        buff.next.prev = newNode;
+        if(buff.next != null){
+            buff.next.prev = newNode;
+        }
+        else{
+            tail = newNode;
+        }
         buff.next = newNode;
         size++;
     }
@@ -76,8 +81,18 @@ public class MyLinkedList<E> implements MyList<E>{
         Node <E> buff = head;
         while(buff != null){
             if(buff.value == item){
+                if (buff.prev != null){
                 buff.prev.next = buff.next;
-                buff.next.prev = buff.prev;
+                }
+                else{
+                    head = buff.next;
+                }
+                if(buff.next != null) {
+                    buff.next.prev = buff.prev;
+                }
+                else {
+                    tail = buff.prev;
+                }
                 size--;
                 return true;
             }
@@ -94,8 +109,18 @@ public class MyLinkedList<E> implements MyList<E>{
             buff = buff.next;
             index--;
         }
-        buff.prev.next = buff.next;
-        buff.next.prev = buff.prev;
+        if (buff.prev != null){
+            buff.prev.next = buff.next;
+        }
+        else{
+            head = buff.next;
+        }
+        if(buff.next != null) {
+            buff.next.prev = buff.prev;
+        }
+        else {
+            tail = buff.prev;
+        }
         size--;
         return buff.value;
     }
@@ -148,6 +173,19 @@ public class MyLinkedList<E> implements MyList<E>{
 
     @Override
     public void sort() {
-
+        Node <E> buff = head;
+        int k = 0;
+        while(buff != null){
+            Node <E> buff2 = buff.next;
+            while(buff2 != null){
+                if(((Comparable)buff.value).compareTo(buff2.value) >= 0){
+                    E temp = buff.value;
+                    buff.value = buff2.value;
+                    buff2.value = temp;
+                }
+                buff2 = buff2.next;
+            }
+            buff = buff.next;
+        }
     }
 }

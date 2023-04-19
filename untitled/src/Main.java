@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        MyArrayList a = new MyArrayList();
+        MyList<Integer> a = new MyLinkedList<>();
         a.add(1);//testing
         a.add(2);//testing
         a.add(7);//testing
@@ -13,11 +13,8 @@ public class Main {
         a.add(7);//testing
         a.add(0);//testing
         System.out.println(a.indexOf(7));//testing
+        a.remove_elem(1);
         System.out.println(a.lastIndexOf(7));//testing
-        a.remove(7);//testing
-        System.out.println(a.contains(7));//testing
-        a.remove_elem(7);//testing
-        System.out.println(a.contains(7));//testing
         a.sort();//testing
         for(int i = 0; i < a.size(); i++){//cycle to output array
             System.out.print(a.get(i) + " ");//output of elem

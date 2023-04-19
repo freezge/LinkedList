@@ -45,12 +45,12 @@ public class MyArrayList<T> implements MyList<T>{
         T[] buff = (T[]) new Object[arr.length];
         int j = 0, s = size;
         for(int i = 0; i < s; i++){
+            buff[j] = arr[i];
             if(i == index){
-                buff[j] = item;
+                buff[j+1] = item;
                 j++;
                 size++;
             }
-            buff[j] = arr[i];
             j++;
         }
         arr = buff;
@@ -144,20 +144,19 @@ public class MyArrayList<T> implements MyList<T>{
         }
         return -1;
     }
+
     @Override
-    public void sort() {}
-//    @Override
-//    public void sort() {
-//        T[] buff = (T[]) new Object[arr.length];
-//        int k = 0;
-//        for(int i = 0; i < size - 1; i++){
-//            for(int j = 0; j < size - i - 1; j++){
-//                if(arr[j] > arr[j+1]){
-//                    T temp = arr[j];
-//                    arr[j] = arr[j+1];
-//                    arr[j+1] = temp;
-//                }
-//            }
-//        }
-//    }
+    public void sort() {
+        T[] buff = (T[]) new Object[arr.length];
+        int k = 0;
+        for(int i = 0; i < size - 1; i++){
+            for(int j = 0; j < size - i - 1; j++){
+                if(((Comparable)arr[j]).compareTo(arr[j+1]) >= 0){
+                    T temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
 }
