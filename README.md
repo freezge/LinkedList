@@ -230,7 +230,8 @@ public class MyArrayList<T> implements MyList<T>{
 ### MyLinkedList:
 ```
 . Create a new class called MyLinkedList that implements the List interface.
-. Define a private inner class called Node that contains an element of type E and references to the next and previous nodes in the list.
+. Define a private inner class called Node that contains an element of type E and references to the next and previous nodes 
+  in the list.
 . Define a private instance variable called head that references the first node in the list.
 . Define a private instance variable called tail that references the last node in the list.
 . Define an int variable called size to keep track of the number of elements in the list.
