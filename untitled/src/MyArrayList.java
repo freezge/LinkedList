@@ -76,91 +76,114 @@ public class MyArrayList<T> implements MyList<T>{
         arr = buff;//buff is our new changed array
     }
 
-
+    /*
+     * @increaseSize() to increase length of array
+     * @param item the element we are adding
+     */
     public void increaseSize(){
-        T[] buff = (T[]) new Object[arr.length*2];
-        for(int i = 0; i < arr.length; i++){
-            buff[i] = arr[i];
+        T[] buff = (T[]) new Object[arr.length*2];//doubling length of an array and creating buff array for copying
+        for(int i = 0; i < arr.length; i++){//loop for copying
+            buff[i] = arr[i];//copying
         }
-        arr = buff;
+        arr = buff;//buff is new array
     }
-
+    /*
+     * @remove_elem() to remove element from the LinkedArray
+     * @param item the element we are removing
+     */
     @Override
     public boolean remove_elem(T item) {
-        T[] buff = (T[]) new Object[arr.length];
+        T[] buff = (T[]) new Object[arr.length];//buffer
         int s = size, j = 0;
-        for(int i = 0; i < s; i++){
-            if(arr[i] == item){
+        for(int i = 0; i < s; i++){//loop
+            if(arr[i] == item){//if we found our elem we are not copying it to buff array
                 size--;
-                continue;
+                continue;//to skip copy
             }
-            buff[j] = arr[i];
+            buff[j] = arr[i];//copy
             j++;
         }
         arr = buff;
-        return s != size;
+        return s != size;//returning true if size changed, false otherwise
     }
 
-
+    /*
+     * @remove() to remove element from the LinkedArray
+     * @param index the index of element we are removing
+     */
     @Override
     public T remove(int index) {
-        check_index(index);
-        T[] buff = (T[]) new Object[arr.length];
+        check_index(index);// checking index for validity
+        T[] buff = (T[]) new Object[arr.length];//buffer
         int s = size, j = 0;
-        for(int i = 0; i < s; i++){
-            if(i == index){
+        for(int i = 0; i < s; i++){//loop
+            if(i == index){//if we are at index we are not copying it to buff array
                 size--;
-                continue;
+                continue;//skipping copy
             }
-            buff[j] = arr[i];
+            buff[j] = arr[i];//copy
             j++;
         }
         arr = buff;
-        return arr[index];
+        return arr[index];//returning new value on this index
     }
-
+    /*
+     * @clear() to clear LinkedArray
+     */
     @Override
     public void clear() {
         this.arr = (T[]) new Object[arr.length];;
         this.size = 0;
     }
-
+    /*
+     * @get() to get element from LinkedArray
+     * @param index index of element
+     */
     @Override
     public T get(int index) {
-        check_index(index);
-        return arr[index];
+        check_index(index);// checking index for validity
+        return arr[index];//returning value of this index
     }
-
+    /*
+     * @indexOf() to find index of element in LinkedArray
+     * @param o element we are comparing
+     */
     @Override
     public int indexOf(Object o) {
-        for(int i = 0; i < size; i++){
-            if(o.equals(arr[i])){
-                return i;
+        for(int i = 0; i < size; i++){//loop
+            if(o.equals(arr[i])){//comparing o and elem
+                return i;//returning index
             }
         }
-        return -1;
+        return -1;//returning -1 if no such element
     }
-
+    /*
+     * @lastindexOf() to find index of last element in LinkedArray
+     * @param 0 element we are comparing
+     */
     @Override
     public int lastIndexOf(Object o) {
-        for(int i = size - 1; i >= 0; i--){
-            if(o.equals(arr[i])){
-                return i;
+        for(int i = size - 1; i >= 0; i--){//loop from end to beginning
+            if(o.equals(arr[i])){//comparing o and elem
+                return i;//returning index
             }
         }
-        return -1;
+        return -1;//returning -1 if no such element
     }
-
+    /*
+     * @sort() for sorting
+     * i used bubble sorting method
+     */
     @Override
     public void sort() {
         T[] buff = (T[]) new Object[arr.length];
         int k = 0;
-        for(int i = 0; i < size - 1; i++){
-            for(int j = 0; j < size - i - 1; j++){
-                if(((Comparable)arr[j]).compareTo(arr[j+1]) >= 0){
-                    T temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+        for(int i = 0; i < size - 1; i++){//loop
+            for(int j = 0; j < size - i - 1; j++){//loop
+                if(((Comparable)arr[j]).compareTo(arr[j+1]) >= 0){//checking if it is comparable type, 0 if equals, 1 if higher
+                    T temp = arr[j];//changing values between 2 elems
+                    arr[j] = arr[j+1];//changing values between 2 elems
+                    arr[j+1] = temp;//changing values between 2 elems
                 }
             }
         }

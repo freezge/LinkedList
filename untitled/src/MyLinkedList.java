@@ -125,7 +125,7 @@ public class MyLinkedList<E> implements MyList<E>{
      */
     @Override
     public E remove(int index) {
-        check_index(index);// checking if we are not at the end already
+        check_index(index);// checking index for validity
         Node <E> buff = head;//buffer
         while(index != 0){//to find our element
             buff = buff.next;//next elem
@@ -171,7 +171,7 @@ public class MyLinkedList<E> implements MyList<E>{
     }
     /*
      * @indexOf() to find index of element in LinkedArray
-     * @param 0 element we are comparing
+     * @param o element we are comparing
      */
     @Override
     public int indexOf(Object o) {
