@@ -1,10 +1,11 @@
-public interface MyList <T>{
+public interface MyList<T>{
     int size();
+    public void check_index(int index);
     boolean contains(Object o);
     void add(T item);
     void add(T item, int index);
     boolean remove_elem(T item);
-    //boolean remove(Object item);
+    //boolean remove(T item);
     T remove(int index);
     void clear();
     T get(int index);

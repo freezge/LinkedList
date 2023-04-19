@@ -1,11 +1,17 @@
 import java.util.ArrayList;
-
-public class MyArrayList implements MyList{
-    private int[] arr;
+public class MyArrayList<T> implements MyList<T>{
+    private T[] arr;
     private int size;
     MyArrayList(){
-        this.arr = new int[5];
+        this.arr = (T[]) new Object[5];;
         this.size = 0;
+    }
+
+    @Override
+    public void check_index(int index){//checking if index is out of bounds
+        if (index >= arr.length || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
     }
     @Override
     public int size() {
@@ -23,23 +29,24 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public void add(Object item) {
+    public void add(T item) {
         if(size == arr.length){
             increaseSize();
         }
-        arr[size++] = (int)item;
+        arr[size++] = item;
     }
 
     @Override
-    public void add(Object item, int index) {
+    public void add(T item, int index) {
+        check_index(index);
         if(size == arr.length){
             increaseSize();
         }
-        int buff[] = new int[arr.length];
+        T[] buff = (T[]) new Object[arr.length];
         int j = 0, s = size;
         for(int i = 0; i < s; i++){
             if(i == index){
-                buff[j] = (int)item;
+                buff[j] = item;
                 j++;
                 size++;
             }
@@ -51,7 +58,7 @@ public class MyArrayList implements MyList{
 
 
     public void increaseSize(){
-        int[] buff = new int[arr.length*2];
+        T[] buff = (T[]) new Object[arr.length*2];
         for(int i = 0; i < arr.length; i++){
             buff[i] = arr[i];
         }
@@ -59,11 +66,11 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public boolean remove_elem(Object item) {
-        int buff[] = new int[arr.length];
+    public boolean remove_elem(T item) {
+        T[] buff = (T[]) new Object[arr.length];
         int s = size, j = 0;
         for(int i = 0; i < s; i++){
-            if(arr[i] == (int)item){
+            if(arr[i] == item){
                 size--;
                 continue;
             }
@@ -90,8 +97,9 @@ public class MyArrayList implements MyList{
 //    }
 
     @Override
-    public Object remove(int index) {
-        int buff[] = new int[arr.length];
+    public T remove(int index) {
+        check_index(index);
+        T[] buff = (T[]) new Object[arr.length];
         int s = size, j = 0;
         for(int i = 0; i < s; i++){
             if(i == index){
@@ -102,20 +110,18 @@ public class MyArrayList implements MyList{
             j++;
         }
         arr = buff;
-        return s != size;
+        return arr[index];
     }
 
     @Override
     public void clear() {
-        this.arr = new int[5];
+        this.arr = (T[]) new Object[arr.length];;
         this.size = 0;
     }
 
     @Override
-    public Object get(int index) {
-        if (index >= arr.length || index < 0){
-            throw new IndexOutOfBoundsException();
-        }
+    public T get(int index) {
+        check_index(index);
         return arr[index];
     }
 
@@ -138,19 +144,20 @@ public class MyArrayList implements MyList{
         }
         return -1;
     }
-
     @Override
-    public void sort() {
-        int buff[] = new int[arr.length];
-        int k = 0;
-        for(int i = 0; i < size - 1; i++){
-            for(int j = 0; j < size - i - 1; j++){
-                if(arr[j] > arr[j+1]){
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
-                }
-            }
-        }
-    }
+    public void sort() {}
+//    @Override
+//    public void sort() {
+//        T[] buff = (T[]) new Object[arr.length];
+//        int k = 0;
+//        for(int i = 0; i < size - 1; i++){
+//            for(int j = 0; j < size - i - 1; j++){
+//                if(arr[j] > arr[j+1]){
+//                    T temp = arr[j];
+//                    arr[j] = arr[j+1];
+//                    arr[j+1] = temp;
+//                }
+//            }
+//        }
+//    }
 }

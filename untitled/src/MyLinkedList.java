@@ -1,23 +1,68 @@
-public class MyLinkedList implements MyList{
-
-    @Override
-    public int size() {
-        return 0;
+public class MyLinkedList<E> implements MyList<E>{
+    private class Node <E> {
+        private E value;
+        private Node<E> next, prev;
+        public Node(E value){
+            this.value = value;
+        }
     }
-
+    private Node <E> head, tail;
+    private int size;
+    MyLinkedList(){ //constructor
+        size = 0;
+        head = null;
+        tail = null;
+    }
+    @Override
+    public int size() {//function to get size
+        return size;
+    }
+    @Override
+    public void check_index(int index){
+        if(index > size || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
+    }
     @Override
     public boolean contains(Object o) {
+        Node <E> buff = head;
+        while(buff != null){
+            if(buff.value == o){
+                return true;
+            }
+            buff = buff.next;
+        }
         return false;
     }
 
     @Override
-    public void add(Object item) {
-
+    public void add(E item) {
+        Node <E> newNode = new Node<E>(item);
+        if(tail == null){
+            head = newNode;
+        }
+        else {
+            tail.next = newNode;
+            newNode.prev = tail;
+        }
+        tail = newNode;
+        size++;
     }
 
     @Override
-    public void add(Object item, int index) {
-
+    public void add(E item, int index) {
+        check_index(index);
+        Node <E> buff = head;
+        while(index != 0){
+            buff = buff.next;
+            index--;
+        }
+        Node <E> newNode = new Node<E>(item);
+        newNode.prev = buff;
+        newNode.next = buff.next;
+        buff.next.prev = newNode;
+        buff.next = newNode;
+        size++;
     }
 
 //    @Override
@@ -27,33 +72,78 @@ public class MyLinkedList implements MyList{
 
 
     @Override
-    public boolean remove_elem(Object item) {
+    public boolean remove_elem(E item) {
+        Node <E> buff = head;
+        while(buff != null){
+            if(buff.value == item){
+                buff.prev.next = buff.next;
+                buff.next.prev = buff.prev;
+                size--;
+                return true;
+            }
+            buff = buff.next;
+        }
         return false;
     }
 
     @Override
-    public Object remove(int index) {
-        return null;
+    public E remove(int index) {
+        check_index(index);
+        Node <E> buff = head;
+        while(index != 0){
+            buff = buff.next;
+            index--;
+        }
+        buff.prev.next = buff.next;
+        buff.next.prev = buff.prev;
+        size--;
+        return buff.value;
     }
 
     @Override
     public void clear() {
-
+        size = 0;
+        head = null;
+        tail = null;
     }
 
     @Override
-    public Object get(int index) {
-        return null;
+    public E get(int index) {
+        check_index(index);
+        Node <E> buff = head;
+        while(index != 0){
+            buff = buff.next;
+            index--;
+        }
+        return buff.value;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int index = 0;
+        Node <E> buff = head;
+        while(buff != null){
+            if(buff.value == o){
+                return index;
+            }
+            buff = buff.next;
+            index++;
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int index = size;
+        Node <E> buff = tail;
+        while(buff != null){
+            if(buff.value == o){
+                return index;
+            }
+            buff = buff.prev;
+            index--;
+        }
+        return -1;
     }
 
     @Override
