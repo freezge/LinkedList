@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        MyList<Integer> a = new MyLinkedList<>();
+        MyList<Integer> a = new MyArrayList<>();
         a.add(1);//testing
         a.add(2);//testing
         a.add(7);//testing
