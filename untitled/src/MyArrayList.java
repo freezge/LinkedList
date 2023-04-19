@@ -48,6 +48,8 @@ public class MyArrayList implements MyList{
         }
         arr = buff;
     }
+
+
     public void increaseSize(){
         int[] buff = new int[arr.length*2];
         for(int i = 0; i < arr.length; i++){
@@ -55,12 +57,13 @@ public class MyArrayList implements MyList{
         }
         arr = buff;
     }
+
     @Override
-    public boolean remove(Object item) {
+    public boolean remove_elem(Object item) {
         int buff[] = new int[arr.length];
         int s = size, j = 0;
         for(int i = 0; i < s; i++){
-            if(arr[i] == Integer.parseInt((String) item)){
+            if(arr[i] == (int)item){
                 size--;
                 continue;
             }
@@ -70,6 +73,21 @@ public class MyArrayList implements MyList{
         arr = buff;
         return s != size;
     }
+//    @Override
+//    public boolean remove(Object item) {
+//        int buff[] = new int[arr.length];
+//        int s = size, j = 0;
+//        for(int i = 0; i < s; i++){
+//            if(arr[i] == Integer.parseInt((String) item)){
+//                size--;
+//                continue;
+//            }
+//            buff[j] = arr[i];
+//            j++;
+//        }
+//        arr = buff;
+//        return s != size;
+//    }
 
     @Override
     public Object remove(int index) {

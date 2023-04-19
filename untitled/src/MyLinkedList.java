@@ -20,8 +20,14 @@ public class MyLinkedList implements MyList{
 
     }
 
+//    @Override
+//    public boolean remove(Object item) {
+//        return false;
+//    }
+
+
     @Override
-    public boolean remove(Object item) {
+    public boolean remove_elem(Object item) {
         return false;
     }
 
