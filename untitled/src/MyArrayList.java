@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class MyArrayList implements MyList{
     private int[] arr;
     private int size;
@@ -30,18 +32,16 @@ public class MyArrayList implements MyList{
 
     @Override
     public void add(Object item, int index) {
-        if (index >= arr.length || index < 0){
-            throw new IndexOutOfBoundsException();
-        }
         if(size == arr.length){
             increaseSize();
         }
-        int j = 0;
-        int[] buff = new int[arr.length];
-        for(int i = 0; i < arr.length; i++){
+        int buff[] = new int[arr.length];
+        int j = 0, s = size;
+        for(int i = 0; i < s; i++){
             if(i == index){
-                buff[j] = (int) item;
+                buff[j] = (int)item;
                 j++;
+                size++;
             }
             buff[j] = arr[i];
             j++;
@@ -50,20 +50,41 @@ public class MyArrayList implements MyList{
     }
     public void increaseSize(){
         int[] buff = new int[arr.length*2];
-        for(int i=0; i < arr.length; i++){
-            buff[i]=arr[i];
+        for(int i = 0; i < arr.length; i++){
+            buff[i] = arr[i];
         }
         arr = buff;
     }
     @Override
     public boolean remove(Object item) {
-        //for ()
-        return false;
+        int buff[] = new int[arr.length];
+        int s = size, j = 0;
+        for(int i = 0; i < s; i++){
+            if(arr[i] == Integer.parseInt((String) item)){
+                size--;
+                continue;
+            }
+            buff[j] = arr[i];
+            j++;
+        }
+        arr = buff;
+        return s != size;
     }
 
     @Override
     public Object remove(int index) {
-        return null;
+        int buff[] = new int[arr.length];
+        int s = size, j = 0;
+        for(int i = 0; i < s; i++){
+            if(i == index){
+                size--;
+                continue;
+            }
+            buff[j] = arr[i];
+            j++;
+        }
+        arr = buff;
+        return s != size;
     }
 
     @Override
@@ -82,12 +103,22 @@ public class MyArrayList implements MyList{
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        for(int i = 0; i < size; i++){
+            if(o.equals(arr[i])){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        for(int i = size - 1; i >= 0; i--){
+            if(o.equals(arr[i])){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
