@@ -223,4 +223,42 @@ public class MyLinkedList<E> implements MyList<E>{
             buff = buff.next;//next element
         }
     }
+    public void slice(int index1, int index2){
+        check_index(index1);
+        check_index(index2);
+        Node <E> buff = head;
+        int len = index2 - index1;
+        int i = index1;
+        while(i!=0){
+            buff = buff.next;
+            i--;
+        }
+        while(len != 0){
+            Node <E> buff2 = buff.next;
+            int b = index1;
+            int len2 = len;
+            while(len2!=0){//loop
+                if(((Comparable)buff.value).compareTo(buff2.value) >= 0){//checking if it is comparable type, 0 if equals, 1 if higher
+                    E temp = buff.value;//changing values between 2 elems
+                    buff.value = buff2.value;//changing values between 2 elems
+                    buff2.value = temp;//changing values between 2 elems
+                }
+                buff2 = buff2.next;//next element
+                len2--;
+            }
+            buff = buff.next;
+            len--;
+        }
+        buff = head;
+        len = index2 - index1 + 1;
+        while(index1!=0){
+            buff = buff.next;
+            index1--;
+        }
+        while(len != 0){
+            System.out.print(buff.value + " ");
+            buff = buff.next;
+            len--;
+        }
+    }
 }

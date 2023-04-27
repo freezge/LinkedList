@@ -188,4 +188,20 @@ public class MyArrayList<T> implements MyList<T>{
             }
         }
     }
+
+    @Override
+    public void slice(int index1, int index2) {
+        for(int i = index1; i < index2; i++){
+            for(int j = index1; j < index2; j++){
+                if(((Comparable)arr[j]).compareTo(arr[j+1]) >= 0){//checking if it is comparable type, 0 if equals, 1 if higher
+                    T temp = arr[j];//changing values between 2 elems
+                    arr[j] = arr[j+1];//changing values between 2 elems
+                    arr[j+1] = temp;//changing values between 2 elems
+                }
+            }
+        }
+        for (int i = index1; i <= index2; i++){
+            System.out.print(arr[i] + " ");
+        }
+    }
 }

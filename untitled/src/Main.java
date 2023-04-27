@@ -17,11 +17,16 @@ public class Main {
         System.out.println(a.indexOf(7));//testing
         a.remove_elem(1);
         System.out.println(a.lastIndexOf(7));//testing
-        a.sort();//testing
         for(int i = 0; i < a.size(); i++){//cycle to output array
             System.out.print(a.get(i) + " ");//output of elem
         }
-        a.clear();//testing
+        System.out.println();
+        a.slice(1,5);//testing
+        System.out.println();
+        for(int i = 0; i < a.size(); i++){//cycle to output array
+            System.out.print(a.get(i) + " ");//output of elem
+        }
+        a.clear();
         for(int i = 0; i < a.size(); i++){//cycle to output array
             System.out.print(a.get(i) + " ");//output of elem
         }
